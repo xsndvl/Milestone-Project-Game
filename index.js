@@ -9,6 +9,9 @@ const hard = document.querySelector('.hard')
 
 const instructionScreen = document.querySelector('.instructions')
 
+const squaresClicked = document.querySelector('.clicked')
+const squaresScreen = document.querySelector('.onScreen')
+
 let easyTime = 600
 let mediumTime = 400
 let hardTime = 320
@@ -25,22 +28,25 @@ const hide = () =>{
 var interval = (x) => {
     setInterval(position, x)
 }
+var endGame = () =>{
+    clearInterval(interval)
+    squaresScreen.innerHTML = `BLOCKS ON SCREEN: ${onScreen}`
+    alert(`You Lost: Press ok to continue game or refresh page to restart.
+    Score: ${lvlClicks}`)
+}
 
 //Difficulty Selection
 const easyDifficulty = () => {
-    time = easyTime
     hide()
-    interval(time)
+    interval(easyTime)
 }
 const mediumDifficulty = () => {
-    time = mediumTime
     hide()
-    interval(time)
+    interval(mediumTime)
 }
 const hardDifficulty = () => {
-    time = hardTime
     hide()
-    interval(time)
+    interval(hardTime)
 }
 
 const startGame = () => {
@@ -102,9 +108,6 @@ const position = () =>{
 
     onScreen++
 
-    const squaresClicked = document.querySelector('.clicked')
-    const squaresScreen = document.querySelector('.onScreen')
-    
     square.addEventListener('click', clicked)
     squaresClicked.innerHTML = `SCORE: ${lvlClicks}`
     squaresScreen.innerHTML = `BLOCKS ON SCREEN: ${onScreen}`
@@ -113,11 +116,5 @@ const position = () =>{
 
     if (onScreen === 20){
         endGame()
-        console.log('peepeepoopoo'+onScreen)
     }
-}
-
-const endGame = () =>{
-    console.log('done')
-    clearInterval(interval)
 }
