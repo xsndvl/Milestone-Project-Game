@@ -1,43 +1,51 @@
 // Coding for the buttons
-var playing = false
 const btn1 = document.querySelector(".button1")
 const btn2 = document.querySelector('.button2')
+const btn3 = document.querySelector('.button3')
 
 const easy = document.querySelector('.easy')
 const medium = document.querySelector('.medium')
 const hard = document.querySelector('.hard')
 
-console.log(playing)
-
+const instructionScreen = document.querySelector('.instructions')
 
 let easyTime = 600
 let mediumTime = 400
 let hardTime = 320
 
-const interval = (x) => {
+const hide = () =>{
+    easy.classList.add('hidden')
+    medium.classList.add('hidden')
+    hard.classList.add('hidden')
+    btn2.classList.add('hidden')
+    btn3.classList.add('hidden')
+    instructionScreen.classList.add('hidden')
+}
+
+var interval = (x) => {
     setInterval(position, x)
 }
 
+//Difficulty Selection
 const easyDifficulty = () => {
     time = easyTime
-    easy.classList.add('hidden')
+    hide()
     interval(time)
 }
 const mediumDifficulty = () => {
     time = mediumTime
-    medium.classList.add('hidden')
+    hide()
     interval(time)
 }
 const hardDifficulty = () => {
     time = hardTime
-    hard.classList.add('hidden')
+    hide()
     interval(time)
 }
 
 const startGame = () => {
     btn1.classList.add('hidden')
     btn2.classList.remove('hidden')
-
     easy.classList.remove('hidden')
     medium.classList.remove('hidden')
     hard.classList.remove('hidden')
@@ -45,20 +53,25 @@ const startGame = () => {
     easy.addEventListener('click', easyDifficulty)
     medium.addEventListener('click', mediumDifficulty)
     hard.addEventListener('click', hardDifficulty)
-        
-    playing = true
-    // interval(time)
-
-    // playing = false
-
 }
 
 btn1.addEventListener('click',startGame)
 
+const instructions = () => {
+    btn1.classList.add('hidden')
+    btn2.classList.remove('hidden')
+    instructionScreen.classList.remove('hidden')
+}
+
+btn3.addEventListener('click', instructions)
+
 const backButton = () => {
     btn1.classList.remove('hidden')
     btn2.classList.add('hidden')
-    playing = false
+    easy.classList.add('hidden')
+    medium.classList.add('hidden')
+    hard.classList.add('hidden')
+    instructionScreen.classList.add('hidden')
 }
 
 btn2.addEventListener('click',backButton)
@@ -66,8 +79,6 @@ btn2.addEventListener('click',backButton)
 //Coding for game 
 var onScreen = 0
 var lvlClicks = 0
-var lvlPassed = false
-var level = 1
 const container = document.querySelector('.container')
 
 
@@ -76,6 +87,8 @@ const position = () =>{
         square.classList.remove('square')
         lvlClicks++
         onScreen--
+        squaresClicked.innerHTML = `SCORE: ${lvlClicks}`
+        squaresScreen.innerHTML = `BLOCKS ON SCREEN: ${onScreen}`
     }
     const square = document.createElement('div')
     square.classList.add('square')
@@ -86,25 +99,25 @@ const position = () =>{
     square.style.top = yPos+"px"
     square.style.left = xPos+"px"
     container.appendChild(square)
-    // console.log(yPos)
-    // console.log(xPos)
 
     onScreen++
 
-    if (onScreen === 20){
-        console.log(onScreen)
-        alert('You lost!')
-        
-    }
-
+    const squaresClicked = document.querySelector('.clicked')
+    const squaresScreen = document.querySelector('.onScreen')
+    
     square.addEventListener('click', clicked)
+    squaresClicked.innerHTML = `SCORE: ${lvlClicks}`
+    squaresScreen.innerHTML = `BLOCKS ON SCREEN: ${onScreen}`
     console.log('squares clicked: '+lvlClicks)
     console.log("on screen "+onScreen)
-    console.log('playing '+playing)
+
+    if (onScreen === 20){
+        endGame()
+        console.log('peepeepoopoo'+onScreen)
+    }
 }
 
-
-
-
-
-
+const endGame = () =>{
+    console.log('done')
+    clearInterval(interval)
+}
