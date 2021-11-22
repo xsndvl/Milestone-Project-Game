@@ -2,19 +2,27 @@
 <html lang = "en" dir = "ltr">
     <head>
         <meta charset = "utf-8">
-        <title>GAME</title>
+        <title>BLOCKY BOPPY - Square Clicker Game</title>
         <link rel = "stylesheet" href = "style.css">
         <script src = "index.js" defer></script>
     </head>
     <body>
-        <header>GAME</header>
+        <header>BLOCKY BOPPY</header>
         <div class = "container">
             <button class = "btn button1">Start</button>
             <button class = "btn button2 hidden">Back</button>
+            <button class = "btn button3">Instructions</button>
 
-            <button class ="btn easy hidden">Easy</button>
-            <button class ="btn medium hidden">Medium</button>
-            <button class ="btn hard hidden">Hard</button>
+            <button class ="btn easy hidden difficulty">Easy</button>
+            <button class ="btn medium hidden difficulty">Medium</button>
+            <button class ="btn hard hidden difficulty">Hard</button>
+
+            <h2 class = "instructions hidden">The rules are simple: click on the squares to score points. Do not let there be more than 20 squares on the screen at one time.</h2>
+
+            <div class = "scoreBoard">
+                <p class = "clicked"></p>
+                <p class = "onScreen"></p>
+            </div>
         </div>
     </body>
 </html>
